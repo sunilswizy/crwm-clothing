@@ -1,0 +1,50 @@
+.custom-button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  background-color: black;
+  min-width: 120px;
+  width: auto;
+  height: 50px;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 30px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+  &.googlesign {
+    background-color: #4254f4;
+    color: #fff;
+
+    &:hover {
+      background-color: #357ae8;
+      border: none;
+    }
+  }
+}
+.small-font {
+  font-size: 14px;
+  padding: 0 20px;
+}
+.cart-btn {
+  position: absolute;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 5px;
+  transition: 0.25s linear;
+
+  &:hover {
+    color: white;
+    background-color: black;
+    border: none;
+  }
+}
