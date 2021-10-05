@@ -4,23 +4,24 @@ import {auth, createUserProfileDocument} from '../../firebase/firebase.utill';
 import Custombtn from '../../components/custom-btn/custom-btn.component';
 import FormInput from '../../components/form-input/form-input.component';
 
+import { useState } from 'react';
+
 import './sign-up.styles.scss'
 
-class Signup extends React.Component{
-        constructor(){
-            super()
+const Signup = () =>{
 
-            this.state={
+        const [userCredentials, setCredentials] = useState({
                 displayName:'',
                 email:'',
                 password:'',
                 c_password:''
-            }
-        }
+        })
 
-        handlesubmit= async (e)=>{
+        const {displayName, email, password, c_password} = userCredentials
+
+
+      const handlesubmit= async (e)=>{
             e.preventDefault();  //prevent Submiting
-            const {displayName, email, password, c_password} = this.state
 
             if(password !== c_password){
                 return alert("Password and Confirm password are not same")
@@ -31,7 +32,7 @@ class Signup extends React.Component{
 
                 await createUserProfileDocument(user , {displayName});
 
-                this.setState({ //after submit clearing the form
+                setCredentials({ //after submit clearing the form
                     displayName:'',
                     email:'',
                     password:'',
@@ -43,29 +44,27 @@ class Signup extends React.Component{
             }
         }
 
-        handlechange=(e)=>{
+        const handlechange=(e)=>{
             const {name, value}= e.target;
 
-            this.setState({
+            setCredentials({...userCredentials ,
                 [name]:value  //dynamically updating state
             })
         }
 
-        render(){
-            const {displayName, email, password, c_password} = this.state
 
             return(
                 <div className="sign-up">
                 <h2 className="title-head">I dont have an account</h2>
                 <span>Create account with email and password</span>
 
-                <form onSubmit={this.handlesubmit} className="sign-up-form">
+                <form onSubmit={handlesubmit} className="sign-up-form">
 
                     <FormInput
                      type="text"
                      name="displayName"
                      value={displayName}
-                     handlechange={this.handlechange}
+                     handlechange={handlechange}
                      label="Display Name"
                      />
 
@@ -73,7 +72,7 @@ class Signup extends React.Component{
                      type="email"
                      name="email"
                      value={email}
-                     handlechange={this.handlechange}
+                     handlechange={handlechange}
                      label="Email"
                      />
 
@@ -81,7 +80,7 @@ class Signup extends React.Component{
                      type="password"
                      name="password"
                      value={password}
-                     handlechange={this.handlechange}
+                     handlechange={handlechange}
                      label="Password"
                      />
 
@@ -89,7 +88,7 @@ class Signup extends React.Component{
                      type="password"
                      name="c_password"
                      value={c_password}
-                     handlechange={this.handlechange}
+                     handlechange={handlechange}
                      label="Confirm password"
                      />
 
@@ -100,6 +99,5 @@ class Signup extends React.Component{
             )
         }
 
-}
 
 export default Signup;

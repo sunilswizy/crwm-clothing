@@ -7,7 +7,7 @@ const Custombtn=({children, googlesign, smallbtn, cart, ...otherprops}) => (
         ` custom-button  
         ${googlesign ? 'googlesign' : ''} 
         ${smallbtn ? 'small-font' : ''} 
-        ${cart ? 'cart-btn' : null}`} 
+        ${cart ? 'cart-btn' : ''}`} 
         {...otherprops}>{children.toUpperCase()}</button>
 )
 

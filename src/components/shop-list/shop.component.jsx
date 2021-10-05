@@ -1,21 +1,21 @@
 import React from 'react'
 import {Route} from 'react-router-dom'
 
-import { fetchCollectionRequest } from '../../redux/shop/shop.saga';
+import fetchCollectionsAsync from '../../redux/shop/shop.actions';
 
 import { connect } from 'react-redux';
 
 import CollectionPageContainer from '../../pages/collections/collections.container';
 import CollectionOverviewContainer from '../collections-overview/collection-overview.container';
 
-class ShopPage extends React.Component{
-    componentDidMount(){
-       const {fetchCollectionRequest} = this.props
-       fetchCollectionRequest()
-    }
+import { useEffect } from 'react';
 
-    render(){ 
-        const {match} = this.props
+const ShopPage = ( {fetchCollectionsAsync, match}) => {
+
+    useEffect(()=> {
+       fetchCollectionsAsync();
+    }, [fetchCollectionsAsync])
+
     return(
     <div className="shop-list">
         <Route exact 
@@ -29,11 +29,10 @@ class ShopPage extends React.Component{
         />
     </div>
     )}
-}
 
 
 const mapDispatchToProps =  dispatch  => ({
-    fetchCollectionRequest: () => dispatch(fetchCollectionRequest())
+    fetchCollectionsAsync: () => dispatch(fetchCollectionsAsync())
 })
 
 export default connect(null, mapDispatchToProps)(ShopPage)

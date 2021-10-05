@@ -16,15 +16,14 @@ import userActions from './redux/users/user.actions';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/users/use.selector';
 
-class App extends React.Component {
+import { useEffect } from 'react';
+
+const App = ({currentuser, userActions}) => {
   
-  unsubscribefromauth = null;
 
-  componentDidMount(){
+   useEffect( () => {
 
-  const {userActions} = this.props;
-
-    this.unsubscribefromauth=auth.onAuthStateChanged(async userAuth=>{
+    const unsubscribefromauth = auth.onAuthStateChanged(async userAuth=>{
       if(userAuth){
          const userRef = await createUserProfileDocument(userAuth)
 
@@ -36,16 +35,19 @@ class App extends React.Component {
          })
         }
       userActions(userAuth);
-      }
-    )};
+      })
+      
+    return () => {
+      unsubscribefromauth();
+    }
+  
+  } , [userActions])
     
 
-  componentWillUnmount(){
-    this.unsubscribefromauth(); // if user logouts
-  }
+  // componentWillUnmount(){
+  //   this.unsubscribefromauth(); // if user logouts
+  // }
 
-  render(){
-    const {currentuser} = this.props;
   return (
     <div>
       <Header/>
@@ -58,7 +60,6 @@ class App extends React.Component {
       </Switch>
     </div>
   );
-}
 }
 
 const mapStateToProps = createStructuredSelector({
