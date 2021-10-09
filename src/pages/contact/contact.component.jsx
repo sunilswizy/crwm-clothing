@@ -30,9 +30,11 @@ class ContactForm extends React.Component{
         </div>
         <div className="form-control">
         <form 
-        action="mailto:contact@yourdomain.com"
+        action="mailto:sunilswizy18@gamil.com"
         method="POST"
-        enctype="multipart/form-data">
+        enctype="multipart/form-data"
+        autoComplete="off"
+        >
 
             <FormInput
                 label = "Email"

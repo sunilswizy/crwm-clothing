@@ -16,6 +16,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 import { selectCurrentUser } from '../../redux/users/use.selector';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
+import { NavLink } from 'react-router-dom';
 
 const Header=({currentuser,hidden})=>{
    const [visibale, change] = useState(false) //for displaying name in header
@@ -27,10 +28,10 @@ const Header=({currentuser,hidden})=>{
 
         <div className="options">
             <div className="option">
-                 <Link to='/shop'>SHOP</Link>
+                 <NavLink to='/shop' activeStyle={{color:"black", fontWeight: "bolder"}}>SHOP</NavLink>
             </div>
             <div className="option">
-                 <Link to='/contact'>CONTACT</Link>
+                 <NavLink to='/contact' activeStyle={{color:"black", fontWeight: "bolder"}}>CONTACT</NavLink>
             </div>
             <div>{
                 currentuser?
@@ -38,7 +39,7 @@ const Header=({currentuser,hidden})=>{
                         SIGN OUT
                 </div>:
                 <div className="option">
-                <Link to='/signin'>SIGN IN</Link>
+                <NavLink to='/signin' activeStyle={{color:"black", fontWeight: "bolder"}}>SIGN IN</NavLink>
                 </div>
             }
             </div>

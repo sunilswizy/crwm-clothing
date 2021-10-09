@@ -44,10 +44,6 @@ const App = ({currentuser, userActions}) => {
   } , [userActions])
     
 
-  // componentWillUnmount(){
-  //   this.unsubscribefromauth(); // if user logouts
-  // }
-
   return (
     <div>
       <Header/>
